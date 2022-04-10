@@ -10,7 +10,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import { userSlice } from './userSlice';
+import { contactsSlice } from './contactsSlice';
 // import storage from 'redux-persist/lib/storage';
 // import todosReducer from './todos/todos-reducer';
 
@@ -24,7 +24,7 @@ import { userSlice } from './userSlice';
 
 export const store = configureStore({
   reducer: {
-    user: userSlice.reducer,
+    contacts: contactsSlice.reducer,
   },
   middleware: getDefaultMiddleware => [...getDefaultMiddleware({
     serializableCheck: {
