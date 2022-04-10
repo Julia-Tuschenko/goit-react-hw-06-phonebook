@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
-// import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from "react-redux";
+import { addContact } from "../redux/contacts/contactsActions";
 import { Forma, LabelPhone, InputPhone, AddContact } from './Form.styled';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function Form({ onSubmit, nameId, numberId }) {
+function Form({ nameId, numberId }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
+  const stateContacts = useSelector((state) => state.contacts.items);
+  // console.log(stateContacts);
+  const dispatch = useDispatch();
 
   const handelChange = event => {
     const onName = event.currentTarget.name;
@@ -23,18 +29,36 @@ function Form({ onSubmit, nameId, numberId }) {
     }
   };
 
-  const handelSubmit = event => {
-    event.preventDefault();
-    onSubmit({ name, number });
-    reset();
-  };
+  const addNewContact = () => {
+      const item = {
+        name,
+        number,
+      }
+      const normalizedContact = item.name.trim().toLowerCase();
+
+      const availableContact = stateContacts.some(
+        (contact) => contact.name.trim().toLowerCase() === normalizedContact)
+    
+      if (availableContact) {
+      return toast.error(`${item.name} is already in contacts!`);
+      } else {
+      dispatch(addContact(item));
+      };
+};
 
   const reset = () => {
     setName('');
     setNumber('');
   };
 
+  const handelSubmit = event => {
+    event.preventDefault();
+    addNewContact();
+    reset();
+  };
+
   return (
+  <>
     <Forma onSubmit={handelSubmit}>
       <LabelPhone htmlFor={nameId}>
         Name
@@ -63,12 +87,22 @@ function Form({ onSubmit, nameId, numberId }) {
       </LabelPhone>
       <AddContact type="submit">Add contact</AddContact>
     </Forma>
+      <ToastContainer
+      position="top-center"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      theme="dark"
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      />
+  </>
   );
-}
-
-Form.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
 };
+
 
 export default Form;
 
