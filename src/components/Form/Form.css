@@ -1,0 +1,26 @@
+.PhoneInputInput{
+    padding: 2px 5px; 
+    margin-top: 6px;
+    width: 200px;
+}
+
+.PhoneInputCountrySelect{
+    padding: 2px 5px;   
+    width: 215px;    
+}
+
+.PhoneInputCountryIconImg{
+    width:30px; 
+    height:30px;
+}
+
+.PhoneInputCountryIcon{
+    width:30px; 
+    height:30px;
+    margin-left: 10px;
+}
+
+.PhoneInputCountry{
+    display: flex;
+    align-items: center;  
+}

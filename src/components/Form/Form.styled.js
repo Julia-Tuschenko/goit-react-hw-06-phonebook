@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 
+
 export const Forma = styled.form`
   padding: 15px;
 `;
@@ -9,6 +10,7 @@ export const LabelPhone = styled.label`
   flex-direction: column;
   font-weight: 400;
   font-size: 18px;
+  margin-top: 6px;
 `;
 
 export const InputPhone = styled.input`
@@ -16,6 +18,8 @@ export const InputPhone = styled.input`
   margin-top: 6px;
   width: 200px;
 `;
+
+
 
 export const AddContact = styled.button`
   padding: 2px 10px;
